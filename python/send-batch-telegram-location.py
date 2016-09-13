@@ -3,9 +3,8 @@
 import requests
 
 # TODO: When you have your own Client ID and secret, put down their values here:
-clientId = "FREE_TRIAL_ACCOUNT"
-clientSecret = "PUBLIC_SECRET"
-
+clientId = "YOUR_OWN_ID_HERE"
+clientSecret = "YOUR_OWN_SECRET_HERE"
 
 jsonBody = {
     'numbers': ['12025550108', '12025550109'],  # FIXME: Put down your registered number here
