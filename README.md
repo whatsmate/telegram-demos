@@ -22,7 +22,11 @@ However, if you are new to git and just want to download the sample code easily,
 
 # How to run the sample code
 
-There are 2 types of scripts in this repo:
+First, follow the instructions to register your phone (or your recipient's phone) with the Telegram Gateway:
+
+* http://www.whatsmate.net/telegram-gateway-api.html
+
+Then, explore the scripts in this repo and run them. There are 2 types of scripts in this repo:
 
 1. Python scripts
 2. Bash shell scripts
