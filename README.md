@@ -31,7 +31,7 @@ Then, explore the scripts in this repo and run them. There are 2 types of script
 1. Python scripts
 2. Bash shell scripts
 
-Just change to the corresponding directory and run the scripts there. Of course, you want to read the scripts and understand them before running them. Each script is independent and standalone.
+Just change to the corresponding directory and run the scripts there. Of course, you want to read the scripts and understand them before running them. Each script is independent and self-contained.
 
 For example,
 
