@@ -39,3 +39,7 @@ For example,
 cd python
 python send-single-telegram-text.py
 ```
+
+# Looking for Video Tutorials?
+
+Check out our [YouTube Channel](https://www.youtube.com/channel/UC5oqUvFNnN_hlDo0L2wkcBw/videos?sort=dd&view=0&shelf_id=0)!
