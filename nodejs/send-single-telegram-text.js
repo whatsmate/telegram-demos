@@ -3,8 +3,8 @@
 var http = require('http');
 
 // When you have your own Client ID and secret, put down their values here:
-var clientId = "FREE_TRIAL_ACCOUNT";
-var clientSecret = "PUBLIC_SECRET";
+var clientId = "YOUR_CLIENT_ID_HERE";
+var clientSecret = "YOUR_CLIENT_SECRET_HERE";
 
 var jsonPayload = JSON.stringify({
     number: "12025550108",  // FIXME

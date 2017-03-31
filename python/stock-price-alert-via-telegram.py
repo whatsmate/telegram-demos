@@ -17,8 +17,8 @@ def getStockQuote(symbol):
 
 def sendTelegramMessage(targetNumber, message):
     # TODO: When you have your own Client ID and secret, put down their values here:
-    clientId = "FREE_TRIAL_ACCOUNT"
-    clientSecret = "PUBLIC_SECRET"
+    clientId = "YOUR_CLIENT_ID_HERE"
+    clientSecret = "YOUR_CLIENT_SECRET_HERE"
 
     jsonBody = {
         'number': targetNumber,

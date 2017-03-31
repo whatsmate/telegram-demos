@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # TODO: If you have your own Client ID and secret, put down their values here:
-CLIENT_ID="FREE_TRIAL_ACCOUNT"
-CLIENT_SECRET="PUBLIC_SECRET"
+CLIENT_ID="YOUR_CLIENT_ID_HERE"
+CLIENT_SECRET="YOUR_CLIENT_SECRET_HERE"
 
 
 read -r -d '' jsonPayload << _EOM_
