@@ -65,7 +65,6 @@ Module Module1
         ' TODO: Remember to copy the PDF from ..\assets to the TEMP directory!
         Dim base64Content As String = ConvertFileToBase64("C:\TEMP\subwaymap.pdf")
 
-
         telegramDocSender.sendDocumentFile({"12025550105"}, "subway.pdf", base64Content)
         Console.WriteLine("Press Enter to exit")
         Console.ReadLine()
