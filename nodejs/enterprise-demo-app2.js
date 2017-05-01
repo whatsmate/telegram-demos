@@ -85,7 +85,7 @@ function sendTelegramMessage(destinationNumber, message) {
     };
 
     request({
-        url: 'http://api.whatsmate.net/v1/telegram/single/message/' + GATEWAY_INSTANCE_ID,
+        url: 'https://enterprise.whatsmate.net/v1/telegram/single/message/' + GATEWAY_INSTANCE_ID,
         method: "POST",
         json: true,
         headers: {

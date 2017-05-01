@@ -9,9 +9,10 @@ Sub WhatsAppMessage_Send(ByRef strNumber As String, ByRef strMessage As String)
     Dim sHTML As String
     Dim oHttp As Object
     
+    INSTANCE_ID = "YOUR_GATEWAY_INSTANCE_ID_HERE"
     CLIENT_ID = "YOUR_CLIENT_ID_HERE"
     CLIENT_SECRET = "YOUR_SECRET_HERE"
-    API_URL = "https://api.whatsmate.net/v2/whatsapp/single/message/2"
+    API_URL = "https://api.whatsmate.net/v2/whatsapp/single/message/" & INSTANCE_ID
    
     strJson = "{""number"": """ & strNumber & """, ""message"": """ & strMessage & """}"
     

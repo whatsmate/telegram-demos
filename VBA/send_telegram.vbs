@@ -9,9 +9,10 @@ Sub TelegramMessage_Send(ByRef strNumber As String, ByRef strMessage As String)
     Dim sHTML As String
     Dim oHttp As Object
     
+    INSTANCE_ID = "YOUR_GATEWAY_INSTANCE_ID_HERE"
     CLIENT_ID = "YOUR_CLIENT_ID_HERE"
     CLIENT_SECRET = "YOUR_CLIENT_SECRET_HERE"
-    API_URL = "http://api.whatsmate.net/v1/telegram/single/message/0"
+    API_URL = "http://api.whatsmate.net/v1/telegram/single/message/" & INSTANCE_ID
    
     strJson = "{""number"": """ & strNumber & """, ""message"": """ & strMessage & """}"
     

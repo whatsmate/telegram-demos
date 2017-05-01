@@ -17,6 +17,7 @@ def getStockQuote(symbol):
 
 def sendTelegramMessage(targetNumber, message):
     # TODO: When you have your own Client ID and secret, put down their values here:
+    instanceId = "YOUR_GATEWAY_INSTANCE_ID_HERE"
     clientId = "YOUR_CLIENT_ID_HERE"
     clientSecret = "YOUR_CLIENT_SECRET_HERE"
 
@@ -30,7 +31,7 @@ def sendTelegramMessage(targetNumber, message):
         'X-WM-CLIENT-SECRET': clientSecret
     }
 
-    r = requests.post('http://api.whatsmate.net/v1/telegram/single/message/0',
+    r = requests.post("http://api.whatsmate.net/v1/telegram/single/message/%s" % instanceId,
         headers=headers,
         json=jsonBody)
 

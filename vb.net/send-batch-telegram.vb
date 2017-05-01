@@ -6,10 +6,11 @@ Imports System.Web.Script.Serialization
 Public Class BatchTelegramMessageSender
 
     ''' TODO: Update the following two lines with your premium account details
+    Private Const INSTANCE_ID As String = "YOUR_GATEWAY_INSTANCE_ID_HERE"
     Private Const CLIENT_ID As String = "YOUR_CLIENT_ID_HERE"
     Private Const CLIENT_SECRET As String = "YOUR_CLIENT_SECRET_HERE"
 
-    Private Const API_URL As String = "http://api.whatsmate.net/v1/telegram/batch/message/0"
+    Private Const API_URL As String = "http://api.whatsmate.net/v1/telegram/batch/message/" + INSTANCE_ID
 
     Public Function sendBatchMessage(ByVal numbers As String(), ByVal message As String) As Boolean
         Dim success As Boolean = True

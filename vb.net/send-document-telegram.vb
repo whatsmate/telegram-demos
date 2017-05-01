@@ -7,7 +7,7 @@ Imports System.Web.Script.Serialization
 Public Class TelegramDocumentSender
 
     ''' TODO: Update the following with your gateway instance ID, client ID and secret.
-    Private Const INSTANCE_ID As String = "0"
+    Private Const INSTANCE_ID As String = "YOUR_GATEWAY_INSTANCE_ID_HERE"
     Private Const CLIENT_ID As String = "YOUR_CLIENT_ID_HERE"
     Private Const CLIENT_SECRET As String = "YOUR_CLIENT_SECRET_HERE"
 

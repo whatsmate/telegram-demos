@@ -3,6 +3,7 @@
 import requests
 
 # TODO: When you have your own Client ID and secret, put down their values here:
+instanceId = "YOUR_GATEWAY_INSTANCE_ID_HERE"
 clientId = "YOUR_OWN_ID_HERE"
 clientSecret = "YOUR_OWN_SECRET_HERE"
 
@@ -17,7 +18,7 @@ headers = {
     'X-WM-CLIENT-SECRET': clientSecret
 }
 
-r = requests.post('http://api.whatsmate.net/v1/telegram/batch/location/0',
+r = requests.post("http://api.whatsmate.net/v1/telegram/batch/location/%s" % instanceId,
     headers=headers,
     json=jsonBody)
 

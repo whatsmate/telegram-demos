@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # TODO: Put down your own Client ID and secret here:
+INSTANCE_ID="YOUR_OWN_INSTANCE_ID_HERE"
 CLIENT_ID="YOUR_OWN_CLIENT_ID_HERE"
 CLIENT_SECRET="YOUR_OWN_SECRET_HERE"
 
@@ -23,6 +24,6 @@ curl --show-error -X POST \
      -H "X-WM-CLIENT-SECRET: $CLIENT_SECRET" \
      -H "Content-Type: application/json" \
      --data-binary @/tmp/jsonbody.txt  \
-     http://api.whatsmate.net/v1/telegram/batch/audio/binary/0
+     http://api.whatsmate.net/v1/telegram/batch/audio/binary/$INSTANCE_ID
 
 echo -e "\n=== END OF DEMO ==="

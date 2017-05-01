@@ -3,6 +3,7 @@
 var http = require('http');
 
 // When you have your own Client ID and secret, put down their values here:
+var instanceId = "YOUR_GATEWAY_INSTANCE_ID";
 var clientId = "YOUR_CLIENT_ID_HERE";
 var clientSecret = "YOUR_CLIENT_SECRET_HERE";
 
@@ -14,7 +15,7 @@ var jsonPayload = JSON.stringify({
 var options = {
     hostname: "api.whatsmate.net",
     port: 80,
-    path: "/v1/telegram/single/message/0",
+    path: "/v1/telegram/single/message/" + instanceId,
     method: "POST",
     headers: {
         "Content-Type": "application/json",

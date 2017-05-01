@@ -3,6 +3,7 @@
 import requests
 
 # TODO: You will need your own Client ID and secret to call this API. Subscribe now if haven't already.
+instanceId = "YOUR_GATEWAY_INSTANCE_ID_HERE"
 clientId = "YOUR_OWN_ID_HERE"
 clientSecret = "YOUR_OWN_SECRET_HERE"
 
@@ -16,7 +17,7 @@ headers = {
     'X-WM-CLIENT-SECRET': clientSecret
 }
 
-r = requests.post('http://api.whatsmate.net/v1/telegram/batch/message/0',
+r = requests.post("http://api.whatsmate.net/v1/telegram/batch/message/%s" % instanceId,
     headers=headers,
     json=jsonBody)
 

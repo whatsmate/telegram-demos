@@ -70,7 +70,7 @@ function sendTelegramMessage(destinationNumber, message) {
     });
 
     var options = {
-        hostname: "api.whatsmate.net",
+        hostname: "enterprise.whatsmate.net",
         port: 80,
         path: "/v1/telegram/single/message/" + GATEWAY_INSTANCE_ID,
         method: "POST",

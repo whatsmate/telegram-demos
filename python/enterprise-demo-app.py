@@ -37,14 +37,15 @@ CLIENT_ID = "YOUR_OWN_CLIENT_ID"
 CLIENT_SECRET = "YOUR_OWN_CLIENT_SECRET"
 
 ##########################
-# TODO: Port of this webhook application server
+# TODO: YOUR GATEWAY INSTANCE ID
 ##########################
-WEB_PORT = 9999
+ENTERPRISE_INSTANCE_ID = "99"
 
 ##########################
 # TODO: Port of this webhook application server
 ##########################
-ENTERPRISE_INSTANCE_ID = 99
+WEB_PORT = 9999
+
 
 
 ##########################
@@ -61,7 +62,7 @@ def sendTelegramMessage(destinationNumber, message):
         'X-WM-CLIENT-SECRET': CLIENT_SECRET
     }
 
-    r = requests.post('http://api.whatsmate.net/v1/telegram/single/message/%i' % ENTERPRISE_INSTANCE_ID,
+    r = requests.post('https://enterprise.whatsmate.net/v1/telegram/single/message/%s' % ENTERPRISE_INSTANCE_ID,
         headers=headers,
         json=jsonBody)
 
