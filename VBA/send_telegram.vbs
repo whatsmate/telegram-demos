@@ -5,7 +5,7 @@ End Sub
 
 Sub TelegramMessage_Send(ByRef strNumber As String, ByRef strMessage As String)
     Dim CLIENT_ID As String, CLIENT_SECRET As String, API_URL As String
-    Dim strJson As String
+    Dim strJson As Variant
     Dim sHTML As String
     Dim oHttp As Object
     
