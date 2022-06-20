@@ -90,3 +90,5 @@ ENV/
 
 
 node_modules/
+
+global-replace.sh

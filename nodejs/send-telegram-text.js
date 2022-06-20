@@ -2,20 +2,19 @@
 
 var http = require('http');
 
-// When you have your own Client ID and secret, put down their values here:
-var instanceId = "YOUR_GATEWAY_INSTANCE_ID";
-var clientId = "YOUR_CLIENT_ID_HERE";
-var clientSecret = "YOUR_CLIENT_SECRET_HERE";
+var instanceId = "YOUR_INSTANCE_ID_HERE"; // TODO: Replace it with your gateway instance ID here
+var clientId = "YOUR_CLIENT_ID_HERE";     // TODO: Replace it with your Premium Account client ID here
+var clientSecret = "YOUR_CLIENT_SECRET_HERE";  // TODO: Replace it with your Premium Account client secret here
 
 var jsonPayload = JSON.stringify({
-    number: "12025550108",  // FIXME
-    message: "Have a nice day! Loving you:)"  // FIXME
+    number: "12025550108",  // TODO: Specify the recipient's number here. NOT the gateway number
+    message: "Howdy, isn't this exciting?"
 });
 
 var options = {
     hostname: "api.whatsmate.net",
     port: 80,
-    path: "/v1/telegram/single/message/" + instanceId,
+    path: "/v3/telegram/single/text/message/" + instanceId,
     method: "POST",
     headers: {
         "Content-Type": "application/json",
@@ -29,7 +28,7 @@ var request = new http.ClientRequest(options);
 request.end(jsonPayload);
 
 request.on('response', function (response) {
-    console.log('Heard back from WhatsMate Telegram Gateway:\n');
+    console.log('Heard back from the WhatsMate Telegram Gateway:\n');
     console.log('Status code: ' + response.statusCode);
     response.setEncoding('utf8');
     response.on('data', function (chunk) {
