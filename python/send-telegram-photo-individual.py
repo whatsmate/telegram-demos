@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import base64
 import requests
@@ -10,8 +10,8 @@ clientId = "YOUR_OWN_ID_HERE"
 clientSecret = "YOUR_OWN_SECRET_HERE"
 
 number = '12025550108'  # FIXME
-caption = "Lovely girl"
 fullpath_to_photo = "../assets/cute-girl.jpg"
+caption = 'Lovely Gal'  # FIXME
 
 # Encode photo in base64 format
 image_base64 = None
@@ -25,11 +25,11 @@ headers = {
 
 jsonBody = {
     'number': number,
-    'caption': caption,
-    'image': image_base64
+    'image': image_base64.decode("utf-8"),
+    'caption': caption
 }
 
-r = requests.post("http://api.whatsmate.net/v1/telegram/single/photo/binary/%s" % instanceId, 
+r = requests.post("http://api.whatsmate.net/v3/telegram/single/image/message/%s" % instanceId, 
     headers=headers,
     json=jsonBody)
 

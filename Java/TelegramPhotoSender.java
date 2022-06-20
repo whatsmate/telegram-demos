@@ -39,48 +39,46 @@ public class TelegramPhotoSender {
      * for sending an image message.
      */
     class ImageMessage {
-        String[] numbers = null;
+        String number = null;
         String caption = null;
         String image = null;
     }
     
-    // TODO: Replace the following with your gateway instance ID, Forever Green
+    // TODO: Replace the following with your gateway instance ID, Premium Account
     // Client ID and Secret below.
     private static final String INSTANCE_ID = "YOUR_INSTANCE_ID_HERE";
     private static final String CLIENT_ID = "YOUR_CLIENT_ID_HERE";
     private static final String CLIENT_SECRET = "YOUR_CLIENT_SECRET_HERE";
 
-    private static final String GATEWAY_URL = "http://api.whatsmate.net/v1/telegram/batch/photo/binary/"
-            + INSTANCE_ID;
+    private static final String GATEWAY_URL = "http://api.whatsmate.net/v3/telegram/single/image/message/" + INSTANCE_ID;
 
     /**
      * Entry Point
      */
     public static void main(String[] args) throws Exception {
         // TODO: Specify the recipients of your image 
-        String[] recipients = {"1234556899", "1234567123"};
-        // TODO: Specify the caption of your image
-        String caption = "Be Happy!"; 
+        String recipient = "1234556899";
         // TODO: Specify the content of your image
-        Path imagePath = Paths.get("./happy.jpg");
+        Path imagePath = Paths.get("../assets/cute-girl.jpg");
         byte[] imageBytes = Files.readAllBytes(imagePath);
+        String caption = "Lovely Gal";
         
-        TelegramPhotoSender groupSender = new TelegramPhotoSender();
-        groupSender.sendPhotoMessage(recipients, caption, imageBytes);
+        TelegramPhotoSender imgSender = new TelegramPhotoSender();
+        imgSender.sendPhotoMessage(recipient, imageBytes, caption);
     }
 
     /**
-     * Sends out a Telegram message to a group
+     * Sends out a Telegram message (an image) to a person
      */
-    public void sendPhotoMessage(String[] recipients, String caption, byte[] imageBytes)
+    public void sendPhotoMessage(String recipient, byte[] imageBytes, String caption)
             throws Exception {
         byte[] encodedBytes = Base64.encodeBase64(imageBytes);
         String base64Image = new String(encodedBytes);
         
         ImageMessage imageMsgObj = new ImageMessage();
-        imageMsgObj.numbers = recipients;
-        imageMsgObj.caption = caption;
+        imageMsgObj.number = recipient;
         imageMsgObj.image = base64Image;
+        imageMsgObj.caption = caption;
 
         Gson gson = new Gson();
         String jsonPayload = gson.toJson(imageMsgObj);
@@ -112,4 +110,3 @@ public class TelegramPhotoSender {
     }
 
 }
-

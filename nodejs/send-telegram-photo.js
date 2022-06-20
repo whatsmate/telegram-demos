@@ -10,14 +10,14 @@ var clientSecret = "YOUR_OWN_SECRET_ID";
 
 var jsonPayload = JSON.stringify({
     number: "12025550108",  // FIXME
-    caption: "Lovely girl", // FIXME
-    image: fs.readFileSync("../assets/cute-girl.jpg").toString('base64')  // FIXME
+    image: fs.readFileSync("../assets/cute-girl.jpg").toString('base64'),  // FIXME
+    caption: "Lovely Gal"  // FIXME
 });
 
 var options = {
     hostname: "api.whatsmate.net",
     port: 80,
-    path: "/v1/telegram/single/photo/binary/" + instanceId,
+    path: "/v3/telegram/single/image/message/" + instanceId,
     method: "POST",
     headers: {
         "Content-Type": "application/json",
@@ -38,5 +38,3 @@ request.on('response', function (response) {
         console.log(chunk);
     });
 });
-
-

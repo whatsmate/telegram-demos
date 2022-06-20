@@ -9,8 +9,8 @@
 
   $postData = array(
     'number' => '12025550108',  // TODO: Specify the recipient's number (NOT the gateway number) here.
-    'caption' => 'My beautiful image',
-    'image' => $base64Image
+    'image' => $base64Image,
+    'caption' => 'Lovely Gal'
   );
 
   $headers = array(
@@ -19,7 +19,7 @@
     'X-WM-CLIENT-SECRET: '.$CLIENT_SECRET
   );
 
-  $url = 'http://api.whatsmate.net/v1/telegram/single/photo/binary/' . $INSTANCE_ID;
+  $url = 'https://api.whatsmate.net/v3/telegram/single/image/message/' . $INSTANCE_ID;
   $ch = curl_init($url);
   curl_setopt($ch, CURLOPT_POST, 1);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
