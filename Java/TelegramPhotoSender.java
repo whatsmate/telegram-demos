@@ -50,7 +50,7 @@ public class TelegramPhotoSender {
     private static final String CLIENT_ID = "YOUR_CLIENT_ID_HERE";
     private static final String CLIENT_SECRET = "YOUR_CLIENT_SECRET_HERE";
 
-    private static final String GATEWAY_URL = "http://api.whatsmate.net/v3/telegram/single/image/message/" + INSTANCE_ID;
+    private static final String GATEWAY_URL = "https://api.whatsmate.net/v3/telegram/single/image/message/" + INSTANCE_ID;
 
     /**
      * Entry Point

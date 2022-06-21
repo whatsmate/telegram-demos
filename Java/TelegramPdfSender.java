@@ -13,10 +13,10 @@
  *  
  *  
  * If you don't use Maven, compile this class using this command: 
- *   javac -cp "jars/gson-2.8.0.jar:jars/commons-codec-1.10.jar" TelegramDocumentSender.java 
+ *   javac -cp "jars/gson-2.8.0.jar:jars/commons-codec-1.10.jar" TelegramPdfSender.java 
  *   
  * Then, run the class using this command:
- *   java -cp ".:jars/gson-2.8.0.jar:jars/commons-codec-1.10.jar" TelegramDocumentSender
+ *   java -cp ".:jars/gson-2.8.0.jar:jars/commons-codec-1.10.jar" TelegramPdfSender
  */
 
 import java.io.BufferedReader;
@@ -33,55 +33,55 @@ import org.apache.commons.codec.binary.Base64;
 import com.google.gson.Gson;
 
 
-public class TelegramDocumentSender {
+public class TelegramPdfSender {
     /**
      * Inner class that captures the information needed to construct the JSON object
-     * for sending a document message.
+     * for sending a Document message.
      */
-    class DocumentMessage {
-        String[] numbers = null;
-        String filename = null;
+    class DocMessage {
+        String number = null;
         String document = null;
+        String filename = null;
+        String caption = null;
     }
     
-    // TODO: Replace the following with your gateway instance ID, Forever Green
+    // TODO: Replace the following with your gateway instance ID, Premium Account
     // Client ID and Secret below.
     private static final String INSTANCE_ID = "YOUR_INSTANCE_ID_HERE";
     private static final String CLIENT_ID = "YOUR_CLIENT_ID_HERE";
     private static final String CLIENT_SECRET = "YOUR_CLIENT_SECRET_HERE";
 
-
-    private static final String GATEWAY_URL = "http://api.whatsmate.net/v1/telegram/batch/document/binary/"
-            + INSTANCE_ID;
+    private static final String GATEWAY_URL = "https://api.whatsmate.net/v3/telegram/single/document/message/" + INSTANCE_ID;
 
     /**
      * Entry Point
      */
     public static void main(String[] args) throws Exception {
-        // TODO: Specify the recipients of your document
-        String[] recipients = {"1234556899", "1234567123"};
-        // TODO: Specify any filename you like
-        String filename = "Arline.pdf"; 
-        // TODO: Specify the content of your document
-        Path docPath = Paths.get("./Arline.pdf");
+        // TODO: Specify the recipients of your image 
+        String recipient = "1234556899";
+        // TODO: Specify the content of your image
+        Path docPath = Paths.get("../assets/subwaymap.pdf");
         byte[] docBytes = Files.readAllBytes(docPath);
+        String filename = "anyname.pdf";
+        String caption = "Check this out";
         
-        TelegramDocumentSender groupSender = new TelegramDocumentSender();
-        groupSender.sendDocumentMessage(recipients, filename, docBytes);
+        TelegramPdfSender docSender = new TelegramPdfSender();
+        docSender.sendDocMessage(recipient, docBytes, filename, caption);
     }
 
     /**
-     * Sends out a Telegram Document message 
+     * Sends out a Telegram message (a document) to a person
      */
-    public void sendDocumentMessage(String[] recipients, String filename, byte[] docBytes)
+    public void sendDocMessage(String recipient, byte[] docBytes, String filename, String caption)
             throws Exception {
         byte[] encodedBytes = Base64.encodeBase64(docBytes);
-        String base64Content = new String(encodedBytes);
+        String base64Doc = new String(encodedBytes);
         
-        DocumentMessage docMsgObj = new DocumentMessage();
-        docMsgObj.numbers = recipients;
+        DocMessage docMsgObj = new DocMessage();
+        docMsgObj.number = recipient;
+        docMsgObj.document = base64Doc;
         docMsgObj.filename = filename;
-        docMsgObj.document = base64Content;
+        docMsgObj.caption = caption;
 
         Gson gson = new Gson();
         String jsonPayload = gson.toJson(docMsgObj);
