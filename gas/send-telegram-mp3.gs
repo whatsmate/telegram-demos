@@ -1,28 +1,27 @@
-
-function demoSendTelegramPdfInDrive() {
+function demoSendTelegramMp3InDrive() {
   var destNumber = "12025550108";  // TODO: Specify the recipients number here. NOT THE GATEWAY NUMBER!
-  var pdfFilename = "subwaymap.pdf";  // TODO: This file must be uniquely named and, of course, exist in your Google Drive!!!
-  var filename = "anyname.pdf";    // TODO: Use any name you like
-  var caption = "Check this out";  // TODO: Use any caption you like
+  var mp3Filename = "ocean-waves.mp3";  // TODO: This file must be uniquely named and, of course, exist in your Google Drive!!!
+  var filename = "anyname.mp3";    // TODO: Use any name you like
+  var caption = "Enjoy the nature";  // TODO: Use any caption you like
 
-  var pdfBase64 = base64encodeFileByName(pdfFilename);
-  if (pdfBase64 == null) {
-    Logger.log("Abort! PDF file error: " + pdfFilename);
+  var mp3Base64 = base64encodeFileByName(mp3Filename);
+  if (mp3Base64 == null) {
+    Logger.log("Abort! MP3 file error: " + mp3Filename);
     return;
   }
   
-  sendTelegramPdf(destNumber, pdfBase64, filename, caption);
+  sendTelegramMp3(destNumber, mp3Base64, filename, caption);
 }
 
 
-function sendTelegramPdf(destNumber, pdfBase64, filename, caption) {
+function sendTelegramMp3(destNumber, mp3Base64, filename, caption) {
   var instanceId = "YOUR_INSTANCE_ID_HERE";  // TODO: Replace it with your gateway instance ID here
   var clientId = "YOUR_CLIENT_ID_HERE";  // TODO: Replace it with your Premium Account client ID here
   var clientSecret = "YOUR_CLIENT_SECRET_HERE";   // TODO: Replace it with your Premium Account client secret here
   
   var jsonPayload = JSON.stringify({
     number: destNumber,
-    document: pdfBase64,
+    audio: mp3Base64,
     filename: filename,
     caption: caption
   });
@@ -38,8 +37,8 @@ function sendTelegramPdf(destNumber, pdfBase64, filename, caption) {
     "Content-Length": jsonPayload.length
   };
   
-  Logger.log("Calling API to send PDF to this number  " + destNumber);
-  UrlFetchApp.fetch("https://api.whatsmate.net/v3/telegram/single/document/message/" + instanceId, options);
+  Logger.log("Calling API to send MP3 to this number  " + destNumber);
+  UrlFetchApp.fetch("https://api.whatsmate.net/v3/telegram/single/audio/message/" + instanceId, options);
 }
 
 

@@ -13,10 +13,10 @@
  *  
  *  
  * If you don't use Maven, compile this class using this command: 
- *   javac -cp "jars/gson-2.8.0.jar:jars/commons-codec-1.10.jar" TelegramAudioSender.java 
+ *   javac -cp "jars/gson-2.8.0.jar:jars/commons-codec-1.10.jar" TelegramMp3Sender.java 
  *   
  * Then, run the class using this command:
- *   java -cp ".:jars/gson-2.8.0.jar:jars/commons-codec-1.10.jar" TelegramAudioSender
+ *   java -cp ".:jars/gson-2.8.0.jar:jars/commons-codec-1.10.jar" TelegramMp3Sender
  */
 
 import java.io.BufferedReader;
@@ -33,57 +33,58 @@ import org.apache.commons.codec.binary.Base64;
 import com.google.gson.Gson;
 
 
-public class TelegramAudioSender {
+public class TelegramMp3Sender {
     /**
      * Inner class that captures the information needed to construct the JSON object
      * for sending an audio message.
      */
     class AudioMessage {
-        String[] numbers = null;
-        String filename = null;
+        String number = null;
         String audio = null;
+        String filename = null;
+        String caption = null;
     }
     
-    // TODO: Replace the following with your gateway instance ID, 
+    // TODO: Replace the following with your gateway instance ID, Premium Account
     // Client ID and Secret below.
     private static final String INSTANCE_ID = "YOUR_INSTANCE_ID_HERE";
     private static final String CLIENT_ID = "YOUR_CLIENT_ID_HERE";
     private static final String CLIENT_SECRET = "YOUR_CLIENT_SECRET_HERE";
 
-    private static final String GATEWAY_URL = "http://api.whatsmate.net/v1/telegram/batch/audio/binary/"
-            + INSTANCE_ID;
+    private static final String GATEWAY_URL = "https://api.whatsmate.net/v3/telegram/single/audio/message/" + INSTANCE_ID;
 
     /**
      * Entry Point
      */
     public static void main(String[] args) throws Exception {
-        // TODO: Specify the recipients of your document
-        String[] recipients = {"1234556899", "1234567123"};
-        // TODO: Specify any filename you like
-        String filename = "Ocean.mp3";
-        // TODO: Specify the content of your audio file
-        Path docPath = Paths.get("../assets/ocean-waves.mp3");
-        byte[] docBytes = Files.readAllBytes(docPath);
+        // TODO: Specify the recipients of your image 
+        String recipient = "1234556899";
+        // TODO: Specify the content of your MP3 file
+        Path audioPath = Paths.get("../assets/ocean-waves.mp3");
+        byte[] audioBytes = Files.readAllBytes(audioPath);
+        String filename = "anyname.mp3";
+        String caption = "Enjoy the nature";
         
-        TelegramAudioSender groupSender = new TelegramAudioSender();
-        groupSender.sendAudioMessage(recipients, filename, docBytes);
+        TelegramMp3Sender mp3Sender = new TelegramMp3Sender();
+        mp3Sender.sendAudioMessage(recipient, audioBytes, filename, caption);
     }
 
     /**
-     * Sends out a Telegram Audio message 
+     * Sends out a Telegram message (an audio file) to a person
      */
-    public void sendAudioMessage(String[] recipients, String filename, byte[] docBytes)
+    public void sendAudioMessage(String recipient, byte[] audioBytes, String filename, String caption)
             throws Exception {
-        byte[] encodedBytes = Base64.encodeBase64(docBytes);
-        String base64Content = new String(encodedBytes);
+        byte[] encodedBytes = Base64.encodeBase64(audioBytes);
+        String base64Audio = new String(encodedBytes);
         
-        AudioMessage docMsgObj = new AudioMessage();
-        docMsgObj.numbers = recipients;
-        docMsgObj.filename = filename;
-        docMsgObj.audio = base64Content;
+        AudioMessage audioMsgObj = new AudioMessage();
+        audioMsgObj.number = recipient;
+        audioMsgObj.audio = base64Audio;
+        audioMsgObj.filename = filename;
+        audioMsgObj.caption = caption;
 
         Gson gson = new Gson();
-        String jsonPayload = gson.toJson(docMsgObj);
+        String jsonPayload = gson.toJson(audioMsgObj);
 
         URL url = new URL(GATEWAY_URL);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
