@@ -4,32 +4,36 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class TelegramSender {
+public class TelegramGroupTextSender {
   // TODO: Replace the following with your instance ID, Premium Account Client ID and Secret:
   private static final String INSTANCE_ID = "YOUR_INSTANCE_ID_HERE";
   private static final String CLIENT_ID = "YOUR_CLIENT_ID_HERE";
   private static final String CLIENT_SECRET = "YOUR_CLIENT_SECRET_HERE";
-  private static final String TG_GATEWAY_URL = "https://api.whatsmate.net/v3/telegram/single/text/message/" + INSTANCE_ID;
+  private static final String TG_GATEWAY_URL = "https://api.whatsmate.net/v3/telegram/group/text/message/" + INSTANCE_ID;
 
   /**
    * Entry Point
    */
   public static void main(String[] args) throws Exception {
-    String number = "12025550108";  //  TODO: Specify the recipient's number here. NOT the gateway number
-    String message = "Howdy, isn't this exciting?";
+    String group_name = "Muscle Men Club";  //  TODO: Specify the group name here.
+    String group_admin = "19159876123";     //  TODO: Specify the number of the group admin here.
+    String message = "Your six-pack is on the way!";
 
-    TelegramSender.sendMessage(number, message);
+    TelegramGroupTextSender.sendGroupMessage(group_name, group_admin, message);
   }
 
   /**
-   * Sends out a Telegram message via WhatsMate Telegram Gateway.
+   * Sends out a group message via WhatsMate Telegram Gateway.
    */
-  public static void sendMessage(String number, String message) throws Exception {
+  public static void sendGroupMessage(String group_name, String group_admin, String message) throws Exception {
     // TODO: Should have used a 3rd party library to make a JSON string from an object
     String jsonPayload = new StringBuilder()
       .append("{")
-      .append("\"number\":\"")
-      .append(number)
+      .append("\"group_name\":\"")
+      .append(group_name)
+      .append("\",")
+      .append("\"group_admin\":\"")
+      .append(group_admin)
       .append("\",")
       .append("\"message\":\"")
       .append(message)
