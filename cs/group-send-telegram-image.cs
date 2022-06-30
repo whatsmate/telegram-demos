@@ -4,25 +4,28 @@ using System.Web.Script.Serialization; // requires the reference 'System.Web.Ext
 using System.IO;
 using System.Text;
 
-class TelegramImageSender
+class TelegramGroupImageSender
 {
     // TODO: Replace the following with your gateway instance ID, client ID and secret!
     private static string INSTANCE_ID = "YOUR_INSTANCE_ID";
     private static string CLIENT_ID = "YOUR_CLIENT_ID_HERE";
     private static string CLIENT_SECRET = "YOUR_CLIENT_SECRET_HERE";
 
-    private static string IMAGE_SINGLE_API_URL = "https://api.whatsmate.net/v3/telegram/single/image/message/" + INSTANCE_ID;
+    private static string IMAGE_GROUP_API_URL = "https://api.whatsmate.net/v3/telegram/group/image/message/" + INSTANCE_ID;
 
     static void Main(string[] args)
     {
-        TelegramImageSender imgSender = new TelegramImageSender();
-        // TODO: Put down your recipient's number (e.g. your own cell phone number)
-        string recipient = "12025550105";
+        TelegramGroupImageSender groupImgSender = new TelegramGroupImageSender();
+
+        // TODO: Put down group name and group admin below
+        string group_name = "Muscle Men Club";
+        string group_admin = "19159876123";
+
         // TODO: Remember to copy the JPG from ..\assets to the TEMP directory!
         string base64Content = convertFileToBase64("C:\\TEMP\\cute-girl.jpg");
-        string caption = "Lovely Gal";
+        string caption = "Lovely Girl";
         
-        imgSender.sendImage(recipient, base64Content, caption);
+        groupImgSender.sendImage(group_name, group_admin, base64Content, caption);
 
         Console.WriteLine("Press Enter to exit.");
         Console.ReadLine();
@@ -36,7 +39,7 @@ class TelegramImageSender
         return base64Encoded;
     }
 
-    public bool sendImage(string number, string base64Content, string caption)
+    public bool sendImage(string group_name, string group_admin, string base64Content, string caption)
     {
         bool success = true;
 
@@ -48,11 +51,11 @@ class TelegramImageSender
                 client.Headers["X-WM-CLIENT-ID"] = CLIENT_ID;
                 client.Headers["X-WM-CLIENT-SECRET"] = CLIENT_SECRET;
 
-                SingleImagePayload payloadObj = new SingleImagePayload() { number = number, caption = caption, image = base64Content};
+                GroupImagePayload payloadObj = new GroupImagePayload() { group_name = group_name, group_admin = group_admin, caption = caption, image = base64Content};
                 string postData = (new JavaScriptSerializer()).Serialize(payloadObj);
 
                 client.Encoding = Encoding.UTF8;
-                string response = client.UploadString(IMAGE_SINGLE_API_URL, postData);
+                string response = client.UploadString(IMAGE_GROUP_API_URL, postData);
                 Console.WriteLine(response);
             }
         }
@@ -69,9 +72,10 @@ class TelegramImageSender
         return success;
     }
 
-    public class SingleImagePayload
+    public class GroupImagePayload
     {
-        public string number { get; set; }
+        public string group_name { get; set; }
+        public string group_admin { get; set; }
         public string caption { get; set; }
         public string image { get; set; }
     }

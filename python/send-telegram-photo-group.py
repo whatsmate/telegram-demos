@@ -9,9 +9,10 @@ instanceId = "YOUR_GATEWAY_INSTANCE_ID_HERE"
 clientId = "YOUR_OWN_ID_HERE"
 clientSecret = "YOUR_OWN_SECRET_HERE"
 
-number = '12025550108'  # FIXME
+group_name = 'Muscle Men Club'  # FIXME: Put down the name of your group here
+group_admin = '19159876123'     # FIXME: Put down the number of the group admin here
 fullpath_to_photo = "../assets/cute-girl.jpg"
-caption = 'Lovely Gal'  # FIXME
+caption = 'Lovely Girl'  # FIXME
 
 # Encode photo in base64 format
 image_base64 = None
@@ -24,12 +25,13 @@ headers = {
 }
 
 jsonBody = {
-    'number': number,
+    'group_name': group_name,
+    'group_admin': group_admin,
     'image': image_base64.decode("utf-8"),
     'caption': caption
 }
 
-r = requests.post("https://api.whatsmate.net/v3/telegram/single/image/message/%s" % instanceId, 
+r = requests.post("https://api.whatsmate.net/v3/telegram/group/image/message/%s" % instanceId, 
     headers=headers,
     json=jsonBody)
 
