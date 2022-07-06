@@ -39,7 +39,7 @@ function sendPdfToTelegramGroup(group_name, group_admin, pdfBase64, filename, ca
     "Content-Length": jsonPayload.length
   };
   
-  Logger.log("Calling API to send PDF to this number  " + destNumber);
+  Logger.log("Calling API to send PDF to this group  " + group_name);
   UrlFetchApp.fetch("https://api.whatsmate.net/v3/telegram/group/document/message/" + instanceId, options);
 }
 
