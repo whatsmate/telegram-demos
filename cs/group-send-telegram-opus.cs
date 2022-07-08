@@ -4,26 +4,29 @@ using System.Web.Script.Serialization; // requires the reference 'System.Web.Ext
 using System.IO;
 using System.Text;
 
-class TelegramOpusSender
+class TelegramGroupOpusSender
 {
     // TODO: Replace the following with your gateway instance ID, client ID and secret!
     private static string INSTANCE_ID = "YOUR_INSTANCE_ID";
     private static string CLIENT_ID = "YOUR_CLIENT_ID_HERE";
     private static string CLIENT_SECRET = "YOUR_CLIENT_SECRET_HERE";
 
-    private static string VOICE_SINGLE_API_URL = "https://api.whatsmate.net/v3/telegram/single/voice_note/message/" + INSTANCE_ID;
+    private static string VOICE_GROUP_API_URL = "https://api.whatsmate.net/v3/telegram/group/voice_note/message/" + INSTANCE_ID;
 
     static void Main(string[] args)
     {
-        TelegramOpusSender opusSender = new TelegramOpusSender();
-        // TODO: Put down your recipient's number (e.g. your own cell phone number)
-        string recipient = "12025550105";
+        TelegramGroupOpusSender opusSender = new TelegramGroupOpusSender();
+
+        // TODO: Put down group name and group admin below
+        string group_name = "Muscle Men Club";
+        string group_admin = "19159876123";
+
         // TODO: Remember to copy the OPUS file from ..\assets to the TEMP directory!
         string base64Content = convertFileToBase64("C:\\TEMP\\martin-luther-king.opus");
         string fn = "anyname.opus";
         string caption = "I have a dream";
         
-        opusSender.sendAudio(recipient, base64Content, fn, caption);
+        opusSender.sendVoiceNoteToGroup(group_name, group_admin, base64Content, fn, caption);
 
         Console.WriteLine("Press Enter to exit.");
         Console.ReadLine();
@@ -37,7 +40,7 @@ class TelegramOpusSender
         return base64Encoded;
     }
 
-    public bool sendAudio(string number, string base64Content, string fn, string caption)
+    public bool sendVoiceNoteToGroup(string group_name, string group_admin, string base64Content, string fn, string caption)
     {
         bool success = true;
 
@@ -49,11 +52,11 @@ class TelegramOpusSender
                 client.Headers["X-WM-CLIENT-ID"] = CLIENT_ID;
                 client.Headers["X-WM-CLIENT-SECRET"] = CLIENT_SECRET;
 
-                SingleVoicePayload payloadObj = new SingleVoicePayload() { number = number, voice_note = base64Content, filename = fn, caption = caption};
+                GroupVoicePayload payloadObj = new GroupVoicePayload() { group_name = group_name, group_admin = group_admin, voice_note = base64Content, filename = fn, caption = caption};
                 string postData = (new JavaScriptSerializer()).Serialize(payloadObj);
 
                 client.Encoding = Encoding.UTF8;
-                string response = client.UploadString(VOICE_SINGLE_API_URL, postData);
+                string response = client.UploadString(VOICE_GROUP_API_URL, postData);
                 Console.WriteLine(response);
             }
         }
@@ -70,9 +73,10 @@ class TelegramOpusSender
         return success;
     }
 
-    public class SingleVoicePayload
+    public class GroupVoicePayload
     {
-        public string number { get; set; }
+        public string group_name { get; set; }
+        public string group_admin { get; set; }
         public string voice_note { get; set; }
         public string filename { get; set; }
         public string caption { get; set; }
