@@ -13,12 +13,12 @@ Public Class TelegramGroupMessageSender
 
     Private Const API_URL As String = "https://api.whatsmate.net/v3/telegram/group/text/message/" + INSTANCE_ID
 
-    Public Function sendGroupMessage(ByVal number As String, ByVal message As String) As Boolean
+    Public Function sendGroupMessage(ByVal group_name As String, ByVal group_admin As String, ByVal message As String) As Boolean
         Dim success As Boolean = True
         Dim webClient As New WebClient()
 
         Try
-            Dim payloadObj As New GroupPayload(number, message)
+            Dim payloadObj As New GroupPayload(group_name, group_admin, message)
             Dim serializer As New JavaScriptSerializer()
             Dim postData As String = serializer.Serialize(payloadObj)
 
